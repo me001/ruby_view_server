@@ -13,9 +13,28 @@
       <p>Put things in the header</p>
       <%= link_to('me', 'http://me.com') %>
       <%= link_to('reddit', 'http://www.reddit.com') %>
+      <%= link_to('google', 'http://www.google.com') %>
     </p>
     <hr />
     <div>
+
+        <form method='post' action="<%= @request.path %>">
+            First name: <input type="text" name="first_name" placeholder='first name'/><br />
+
+            Life Story: <input type="textarea" name="life_story" placeholder='life story...' /> <br />
+            <input type="submit" value="Submit" />
+        </form>
+
+         <% if @request.query['first_name'] && !@request.query['first_name'].empty? %>
+        Hello there <%= @request.query['first_name'] %>.
+      <% else %>
+        Enter thy name.
+      <% end %>
+
+       <% if @request.query['life_story'] && !@request.query['life_story'].empty? %>
+        Oh that is so interesting that you <%= @request.query['life_story'] %>!
+        <% end %>
+
       <%= yield %>
     </div>
     <hr />
